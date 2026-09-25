@@ -1,0 +1,28 @@
+# 编译产物
+out/
+gen/
+*.o *.a
+
+# 原生库（build.sh 会自己编）
+libtiny386.so
+
+# 编译存根（126MB，绝对不能提交）
+android-all.jar
+*.jar
+
+# 🔴 签名密钥（绝对不能提交！）
+*.keystore
+*.jks
+*.p12
+
+# 构建日志
+logs/
+*.log
+
+# 上游参考源码（体积大，用链接代替）
+upstream/
+
+# 系统文件
+.DS_Store
+*.swp
+*~
