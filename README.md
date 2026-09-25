@@ -1,5 +1,7 @@
 # Tiny386 for Android
 
+**English** | [简体中文](README.zh-CN.md)
+
 **A working x86 PC emulator for Android — built entirely on a phone.**
 No computer, no Android Studio, no downloaded NDK: the whole toolchain runs inside
 [Termux](https://termux.dev), and the APK is assembled by hand with `aapt` / `javac` /
