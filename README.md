@@ -10,6 +10,8 @@ No computer, no Android Studio, no downloaded NDK: the whole toolchain runs insi
 Based on the excellent [tiny386](https://github.com/hchunhui/tiny386) PC emulator by
 Chunhui He (BSD-3-Clause).
 
+**📥 Download: [latest APK](https://github.com/main974/Android-Tiny386-app/releases/latest)** (333 KB, `arm64-v8a`, Android 5.0+)
+
 ---
 
 ## Highlights

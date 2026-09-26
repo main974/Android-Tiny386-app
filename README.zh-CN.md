@@ -9,6 +9,8 @@
 
 基于 [tiny386](https://github.com/hchunhui/tiny386)（作者 Chunhui He，BSD-3-Clause 许可）。
 
+**📥 下载：[最新版本 APK](https://github.com/main974/Android-Tiny386-app/releases/latest)** （333 KB · `arm64-v8a` · Android 5.0+）
+
 ---
 
 ## 亮点

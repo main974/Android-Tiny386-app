@@ -1,0 +1,50 @@
+name: Release
+
+on:
+  push:
+    branches: [ main ]
+    paths:
+      - 'dist/**'
+      - '.github/workflows/release.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: release-${{ github.ref }}
+  cancel-in-progress: false
+
+jobs:
+  release:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: 读出版本号
+        id: v
+        run: |
+          echo "tag=$(cat dist/TAG)"     >> "$GITHUB_OUTPUT"
+          echo "title=$(cat dist/TITLE)" >> "$GITHUB_OUTPUT"
+          echo "--- dist/ ---"; ls -l dist/
+
+      - name: 创建（或更新）Release
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: |
+          set -euo pipefail
+          TAG="${{ steps.v.outputs.tag }}"
+          TITLE="${{ steps.v.outputs.title }}"
+          if gh release view "$TAG" >/dev/null 2>&1; then
+            echo "Release $TAG 已存在 → 覆盖附件并更新说明"
+            gh release upload "$TAG" dist/*.apk --clobber
+            gh release edit   "$TAG" --title "$TITLE" --notes-file dist/RELEASE_NOTES.md
+          else
+            echo "Release $TAG 不存在 → 新建"
+            gh release create "$TAG" dist/*.apk --title "$TITLE" --notes-file dist/RELEASE_NOTES.md
+          fi
+
+      - name: 核对结果
+        env:
+          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        run: gh release view "${{ steps.v.outputs.tag }}"
